@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>James Elton Coffman, III - Class A CDL Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --secondary: #1e293b;
+      --accent: #0284c7;
+      --accent-dark: #0369a1;
+      --highlight: #f8fafc;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border: #e2e8f0;
+      --badge-bg: #f0f9ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0b0f19;
+      color: var(--text-main);
+      padding: 30px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .controls {
+      width: 100%;
+      max-width: 860px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-pdf {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+    }
+    .btn-pdf:hover { background: var(--accent-dark); }
+
+    .resume-sheet {
+      width: 100%;
+      max-width: 860px;
+      background: #ffffff;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-banner {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 36px 36px 30px 36px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 28px;
+      align-items: center;
+      border-bottom: 4px solid var(--accent);
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 135px;
+      height: 135px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, #38bdf8, #0284c7);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      flex-shrink: 0;
+    }
+
+    .avatar-container {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+      background: #000;
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 18%;
+      filter: contrast(1.08) brightness(1.03);
+      transform: scale(1.03);
+    }
+
+    .avatar-overlay {
+      position: absolute;
+      inset: 0;
+      box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.4);
+      pointer-events: none;
+      border-radius: 50%;
+    }
+
+    .header-info h1 {
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 32px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .header-info .subhead {
+      color: #38bdf8;
+      font-weight: 700;
+      font-size: 14.5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .header-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      font-size: 13px;
+      color: #cbd5e1;
+    }
+
+    .resume-body {
+      padding: 32px 36px;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 32px;
+    }
+
+    .sidebar {
+      border-right: 1px solid var(--border);
+      padding-right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+      padding-bottom: 4px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .card-block {
+      background: var(--highlight);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      padding: 8px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .card-block strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .card-block span {
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    .spec-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .spec-list li {
+      position: relative;
+      padding-left: 12px;
+    }
+
+    .spec-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .main-col {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .summary-text {
+      font-size: 12.5px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    .job-entry {
+      margin-bottom: 16px;
+    }
+
+    .job-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+
+    .job-role {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--primary);
+    }
+
+    .job-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--badge-bg);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .job-firm {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+
+    .job-duties {
+      list-style: none;
+      padding-left: 14px;
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      line-height: 1.45;
+    }
+
+    .job-duties li {
+      position: relative;
+    }
+
+    .job-duties li::before {
+      content: "–";
+      position: absolute;
+      left: -12px;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .ref-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+      }
+      .controls {
+        display: none !important;
+      }
+      .resume-sheet {
+        box-shadow: none;
+        border-radius: 0;
+        max-width: 100%;
+        width: 100%;
+      }
+      .header-banner, .card-block, .job-tag {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .resume-body {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding-right: 0;
+        padding-bottom: 20px;
+      }
+      .header-banner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+      }
+      .header-contacts {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="controls">
+    <button class="btn btn-pdf" onclick="window.print()">
+      Print / Save PDF
+    </button>
+  </div>
+
+  <div class="resume-sheet">
+    <header class="header-banner">
+      <div class="avatar-wrapper">
+        <div class="avatar-container">
+          <img class="avatar-img" src="1000011344.jpg" alt="James Elton Coffman, III">
+          <div class="avatar-overlay"></div>
+        </div>
+      </div>
+      <div class="header-info">
+        <h1>James Elton Coffman, III</h1>
+        <div class="subhead">Class A Commercial Driver (CDL-A)</div>
+        <div class="header-contacts">
+          <span>📍 Winchester, VA 22601</span>
+          <span>📞 (826) 255-0831</span>
+          <span>✉️ Jcoffman4@my.ancoraed.com</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="resume-body">
+      <aside class="sidebar">
+        <div>
+          <h2 class="section-title">Credentials</h2>
+          <div class="card-block">
+            <strong>Virginia CDL-A</strong>
+            <span>Non-Excepted Interstate</span>
+          </div>
+          <div class="card-block">
+            <strong>DOT Medical Certificate</strong>
+            <span>Certified Thru 11/03/2026</span>
+          </div>
+          <div class="card-block">
+            <strong>FMCSA Clearinghouse</strong>
+            <span>Pre-Employment Screen: Clear</span>
+          </div>
+          <div class="card-block">
+            <strong>Safety Standing</strong>
+            <span>+2 Points • Clean 3+ Yr Record</span>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="section-title">Equipment</h2>
+          <ul class="spec-list">
+            <li>53' Refrigerated (Reefer)</li>
+            <li>Class 8 Tractor-Trailers</li>
+            <li>Straight / Box Trucks</li>
+            <li>ELD & Paper Logbooks</li>
+            <li>Pre/Post-Trip Walkarounds</li>
+            <li>Dock Staging & Forklift</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="section-title">Route Availability</h2>
+          <ul class="spec-list">
+            <li>Regional / OTR Freight Runs</li>
+            <li>10–14 Days Out / 3–5 Days Home</li>
+            <li>Weekly Dedicated / Weekend Resets</li>
+            <li>Mid-Atlantic & Midwest Corridors</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="section-title">Education</h2>
+          <div class="card-block">
+            <strong>Laurel Ridge / AncoraED</strong>
+            <span>160-Hr CDL Training (94.6% A)<br>Middletown, VA • 09/2026</span>
+          </div>
+          <div class="card-block">
+            <strong>Rosedale Tech</strong>
+            <span>CDL-A & Preventative Maint.<br>Pittsburgh, PA • 09/2013</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-col">
+        <section>
+          <h2 class="section-title">Professional Summary</h2>
+          <p class="summary-text">
+            Safety-focused Commercial Driver holding an active Virginia Class A CDL with over 6 cumulative years of commercial freight and heavy equipment experience[cite: 4, 6, 7, 8, 37]. Proven operating record piloting 53-foot refrigerated units across multi-state interstate corridors, straight trucks on regional freight lines, and yard staging operations[cite: 4, 6, 7, 8]. Reinforced by a recent 160-hour FMCSA-aligned driver training refresher with a 94.6% Grade A standing[cite: 8]. Current Non-Excepted Interstate DOT Medical Card, clean FMCSA Clearinghouse status, and positive safe driving points balance[cite: 10, 36, 37, 39, 40].
+          </p>
+        </section>
+
+        <section>
+          <h2 class="section-title">Commercial Experience</h2>
+          
+          <div class="job-entry">
+            <div class="job-top">
+              <span class="job-role">Box Truck Driver</span>
+              <span class="job-tag">12/2025 – 03/2026</span>
+            </div>
+            <div class="job-firm">Schewells Furniture | Winchester, VA</div>
+            <ul class="job-duties">
+              <li>Delivered cargo throughout the Northern Shenandoah Valley in commercial straight trucks[cite: 4].</li>
+              <li>Logged 500–1,000 weekly miles under FMCSA compliance and DOT testing standards[cite: 4].</li>
+              <li>Managed cargo securement, freight verification, and daily vehicle walkaround checks.</li>
+            </ul>
+          </div>
+
+          <div class="job-entry">
+            <div class="job-top">
+              <span class="job-role">Dealer Exchange (DX) Driver</span>
+              <span class="job-tag">04/2023 – 12/2025</span>
+            </div>
+            <div class="job-firm">Malloy Chevrolet | Winchester, VA</div>
+            <ul class="job-duties">
+              <li>Completed regional on-call vehicle transfers across multi-dealership networks[cite: 5].</li>
+              <li>Maintained zero transit infractions and flawless vehicle handling performance[cite: 5, 10].</li>
+            </ul>
+          </div>
+
+          <div class="job-entry">
+            <div class="job-top">
+              <span class="job-role">Forklift Operator / Yard Material Handler</span>
+              <span class="job-tag">02/2020 – 04/2023</span>
+            </div>
+            <div class="job-firm">Kamps Pallets | Grand Rapids, MI</div>
+            <ul class="job-duties">
+              <li>Coordinated freight loading, unloading, and yard staging for commercial tractor-trailers[cite: 6].</li>
+              <li>Maintained strict adherence to OSHA and heavy equipment yard safety procedures[cite: 6].</li>
+            </ul>
+          </div>
+
+          <div class="job-entry">
+            <div class="job-top">
+              <span class="job-role">Commercial Truck Driver (OTR)</span>
+              <span class="job-tag">09/2015 – 02/2020</span>
+            </div>
+            <div class="job-firm">A&R Logistics | Joliet, IL</div>
+            <ul class="job-duties">
+              <li>Operated Class 8 tractor-trailers hauling 53-foot refrigerated freight across Central US routes[cite: 6, 7].</li>
+              <li>Maintained 3,000–3,500 miles weekly under DOT hours-of-service rules and temperature-controlled freight protocols[cite: 7].</li>
+            </ul>
+          </div>
+
+          <div class="job-entry">
+            <div class="job-top">
+              <span class="job-role">Commercial Driver</span>
+              <span class="job-tag">10/2013 – 09/2015</span>
+            </div>
+            <div class="job-firm">Royal Flush Inc. | Carmichaels, PA</div>
+            <ul class="job-duties">
+              <li>Drove commercial straight trucks servicing regional industrial sites across PA, NY, NJ, and OH[cite: 7, 8].</li>
+              <li>Logged 2,000–2,500 weekly miles under rugged winter and industrial worksite conditions[cite: 8].</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">Professional References</h2>
+          <div class="ref-grid">
+            <div class="card-block">
+              <strong>Leroy Ware</strong>
+              <span>Colleague / Reference • (408) 890-8335[cite: 3]</span>
+            </div>
+            <div class="card-block">
+              <strong>Aaron Branham</strong>
+              <span>Professional Reference • (540) 333-5032[cite: 3]</span>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+</body>
+</html>
