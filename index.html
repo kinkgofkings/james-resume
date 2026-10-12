@@ -30,7 +30,7 @@
       font-family: 'Inter', sans-serif;
       background-color: #0b0f19;
       color: var(--text-main);
-      padding: 30px 14px;
+      padding: 24px 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -39,7 +39,7 @@
 
     .controls {
       width: 100%;
-      max-width: 860px;
+      max-width: 880px;
       margin-bottom: 16px;
       display: flex;
       justify-content: flex-end;
@@ -49,6 +49,7 @@
     .btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       padding: 10px 18px;
       border-radius: 6px;
@@ -69,35 +70,36 @@
 
     .resume-sheet {
       width: 100%;
-      max-width: 860px;
+      max-width: 880px;
       background: #ffffff;
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
     }
 
+    /* Header Banner - Fully Responsive & Centered */
     .header-banner {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      background: linear-gradient(135deg, #0b1324 0%, #1e293b 100%);
       color: #ffffff;
-      padding: 36px 36px 30px 36px;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 28px;
+      padding: 36px 24px;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      text-align: center;
       border-bottom: 4px solid var(--accent);
     }
 
     .avatar-wrapper {
       position: relative;
-      width: 135px;
-      height: 135px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       padding: 3px;
       background: linear-gradient(135deg, #38bdf8, #0284c7);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-      flex-shrink: 0;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      margin-bottom: 18px;
     }
 
     .avatar-container {
@@ -113,9 +115,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: 50% 18%;
-      filter: contrast(1.08) brightness(1.03);
-      transform: scale(1.03);
+      object-position: center top;
+      display: block;
     }
 
     .avatar-overlay {
@@ -126,15 +127,26 @@
       border-radius: 50%;
     }
 
+    .header-info {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
     .header-info h1 {
       font-family: 'Oswald', sans-serif;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.2px;
       font-size: 32px;
       font-weight: 700;
       color: #ffffff;
-      line-height: 1.1;
-      margin-bottom: 4px;
+      line-height: 1.15;
+      margin-bottom: 8px;
+      text-align: center;
+      width: 100%;
     }
 
     .header-info .subhead {
@@ -142,22 +154,86 @@
       font-weight: 700;
       font-size: 14.5px;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
+      letter-spacing: 1.5px;
+      margin-bottom: 14px;
+      text-align: center;
+      width: 100%;
+      display: block;
     }
 
     .header-contacts {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px 20px;
+      justify-content: center;
+      align-items: center;
+      gap: 12px 18px;
       font-size: 13px;
       color: #cbd5e1;
+      width: 100%;
     }
 
+    .contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Verification Quick Bar - MVR & DOT Only */
+    .docs-bar {
+      background: #f1f5f9;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .docs-bar-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .docs-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .doc-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .doc-pill:hover {
+      border-color: var(--accent);
+      background: var(--badge-bg);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    /* Main Grid Structure */
     .resume-body {
-      padding: 32px 36px;
+      padding: 32px 32px;
       display: grid;
-      grid-template-columns: 240px 1fr;
+      grid-template-columns: 260px 1fr;
       gap: 32px;
     }
 
@@ -185,7 +261,7 @@
       background: var(--highlight);
       border: 1px solid var(--border);
       border-left: 3px solid var(--accent);
-      padding: 8px 10px;
+      padding: 10px 12px;
       border-radius: 4px;
       font-size: 12px;
       margin-bottom: 8px;
@@ -195,18 +271,20 @@
       display: block;
       color: var(--primary);
       margin-bottom: 2px;
+      font-size: 12.5px;
     }
 
     .card-block span {
       color: var(--text-muted);
-      line-height: 1.3;
+      line-height: 1.35;
+      display: block;
     }
 
     .spec-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 6px;
       font-size: 12px;
       color: var(--text-muted);
     }
@@ -260,6 +338,7 @@
       background: var(--badge-bg);
       padding: 2px 7px;
       border-radius: 4px;
+      white-space: nowrap;
     }
 
     .job-firm {
@@ -298,12 +377,13 @@
       gap: 12px;
     }
 
+    /* Print & Export Rules */
     @media print {
       body {
         background: none;
         padding: 0;
       }
-      .controls {
+      .controls, .docs-bar {
         display: none !important;
       }
       .resume-sheet {
@@ -318,23 +398,50 @@
       }
     }
 
+    /* Mobile Responsive Layout */
     @media (max-width: 768px) {
       .resume-body {
         grid-template-columns: 1fr;
+        padding: 24px 18px;
+        gap: 24px;
       }
+
       .sidebar {
         border-right: none;
         border-bottom: 1px solid var(--border);
         padding-right: 0;
-        padding-bottom: 20px;
+        padding-bottom: 24px;
       }
-      .header-banner {
-        grid-template-columns: 1fr;
-        text-align: center;
-        justify-items: center;
+
+      .header-info h1 {
+        font-size: 26px;
       }
+
+      .header-info .subhead {
+        font-size: 13.5px;
+      }
+
       .header-contacts {
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .docs-bar {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+      }
+
+      .docs-actions {
+        flex-direction: column;
+      }
+
+      .doc-pill {
         justify-content: center;
+      }
+
+      .ref-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -348,6 +455,8 @@
   </div>
 
   <div class="resume-sheet">
+
+    <!-- Header Section -->
     <header class="header-banner">
       <div class="avatar-wrapper">
         <div class="avatar-container">
@@ -359,12 +468,24 @@
         <h1>James Elton Coffman, III</h1>
         <div class="subhead">Class A Commercial Driver (CDL-A)</div>
         <div class="header-contacts">
-          <span>📍 Winchester, VA 22601</span>
-          <span>📞 (826) 255-0831</span>
-          <span>✉️ Jcoffman4@my.ancoraed.com</span>
+          <span class="contact-item">📍 Winchester, VA 22601</span>
+          <span class="contact-item">📞 (826) 255-0831</span>
+          <span class="contact-item">✉️ Jcoffman4@my.ancoraed.com</span>
         </div>
       </div>
     </header>
+
+    <!-- Verified Reports Quick Bar -->
+    <section class="docs-bar">
+      <div class="docs-bar-title">
+        <span>📄 Verified Screening & Driver Record:</span>
+      </div>
+      <div class="docs-actions">
+        <a class="doc-pill" href="James_Coffman_MVR_DOT_Report.pdf" target="_blank" download>
+          ⬇️ DOT Medical & MVR Record (PDF)
+        </a>
+      </div>
+    </section>
 
     <div class="resume-body">
       <aside class="sidebar">
@@ -427,7 +548,7 @@
         <section>
           <h2 class="section-title">Professional Summary</h2>
           <p class="summary-text">
-            Safety-focused Commercial Driver holding an active Virginia Class A CDL with over 6 cumulative years of commercial freight and heavy equipment experience[cite: 4, 6, 7, 8, 37]. Proven operating record piloting 53-foot refrigerated units across multi-state interstate corridors, straight trucks on regional freight lines, and yard staging operations[cite: 4, 6, 7, 8]. Reinforced by a recent 160-hour FMCSA-aligned driver training refresher with a 94.6% Grade A standing[cite: 8]. Current Non-Excepted Interstate DOT Medical Card, clean FMCSA Clearinghouse status, and positive safe driving points balance[cite: 10, 36, 37, 39, 40].
+            Safety-focused Commercial Driver holding an active Virginia Class A CDL with over 6 cumulative years of commercial freight and heavy equipment experience. Proven operating record piloting 53-foot refrigerated units across multi-state interstate corridors, straight trucks on regional freight lines, and yard staging operations. Reinforced by a recent 160-hour FMCSA-aligned driver training refresher with a 94.6% Grade A standing. Current Non-Excepted Interstate DOT Medical Card, clean FMCSA Clearinghouse status, and positive safe driving points balance.
           </p>
         </section>
 
@@ -441,8 +562,8 @@
             </div>
             <div class="job-firm">Schewells Furniture | Winchester, VA</div>
             <ul class="job-duties">
-              <li>Delivered cargo throughout the Northern Shenandoah Valley in commercial straight trucks[cite: 4].</li>
-              <li>Logged 500–1,000 weekly miles under FMCSA compliance and DOT testing standards[cite: 4].</li>
+              <li>Delivered cargo throughout the Northern Shenandoah Valley in commercial straight trucks.</li>
+              <li>Logged 500–1,000 weekly miles under FMCSA compliance and DOT testing standards.</li>
               <li>Managed cargo securement, freight verification, and daily vehicle walkaround checks.</li>
             </ul>
           </div>
@@ -454,8 +575,8 @@
             </div>
             <div class="job-firm">Malloy Chevrolet | Winchester, VA</div>
             <ul class="job-duties">
-              <li>Completed regional on-call vehicle transfers across multi-dealership networks[cite: 5].</li>
-              <li>Maintained zero transit infractions and flawless vehicle handling performance[cite: 5, 10].</li>
+              <li>Completed regional on-call vehicle transfers across multi-dealership networks.</li>
+              <li>Maintained zero transit infractions and flawless vehicle handling performance.</li>
             </ul>
           </div>
 
@@ -466,8 +587,8 @@
             </div>
             <div class="job-firm">Kamps Pallets | Grand Rapids, MI</div>
             <ul class="job-duties">
-              <li>Coordinated freight loading, unloading, and yard staging for commercial tractor-trailers[cite: 6].</li>
-              <li>Maintained strict adherence to OSHA and heavy equipment yard safety procedures[cite: 6].</li>
+              <li>Coordinated freight loading, unloading, and yard staging for commercial tractor-trailers.</li>
+              <li>Maintained strict adherence to OSHA and heavy equipment yard safety procedures.</li>
             </ul>
           </div>
 
@@ -478,8 +599,8 @@
             </div>
             <div class="job-firm">A&R Logistics | Joliet, IL</div>
             <ul class="job-duties">
-              <li>Operated Class 8 tractor-trailers hauling 53-foot refrigerated freight across Central US routes[cite: 6, 7].</li>
-              <li>Maintained 3,000–3,500 miles weekly under DOT hours-of-service rules and temperature-controlled freight protocols[cite: 7].</li>
+              <li>Operated Class 8 tractor-trailers hauling 53-foot refrigerated freight across Central US routes.</li>
+              <li>Maintained 3,000–3,500 miles weekly under DOT hours-of-service rules and temperature-controlled freight protocols.</li>
             </ul>
           </div>
 
@@ -490,8 +611,8 @@
             </div>
             <div class="job-firm">Royal Flush Inc. | Carmichaels, PA</div>
             <ul class="job-duties">
-              <li>Drove commercial straight trucks servicing regional industrial sites across PA, NY, NJ, and OH[cite: 7, 8].</li>
-              <li>Logged 2,000–2,500 weekly miles under rugged winter and industrial worksite conditions[cite: 8].</li>
+              <li>Drove commercial straight trucks servicing regional industrial sites across PA, NY, NJ, and OH.</li>
+              <li>Logged 2,000–2,500 weekly miles under rugged winter and industrial worksite conditions.</li>
             </ul>
           </div>
         </section>
@@ -501,11 +622,11 @@
           <div class="ref-grid">
             <div class="card-block">
               <strong>Leroy Ware</strong>
-              <span>Colleague / Reference • (408) 890-8335[cite: 3]</span>
+              <span>Colleague / Reference • (408) 890-8335</span>
             </div>
             <div class="card-block">
               <strong>Aaron Branham</strong>
-              <span>Professional Reference • (540) 333-5032[cite: 3]</span>
+              <span>Professional Reference • (540) 333-5032</span>
             </div>
           </div>
         </section>
