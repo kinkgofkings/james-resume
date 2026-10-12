@@ -1,6 +1,6 @@
 # James Elton Coffman, III
-**Commercial Truck Driver (Class A CDL)**[cite: 36, 37]  
-Winchester, VA 22601[cite: 1] • (826) 255-0831[cite: 1] • Jcoffman4@my.ancoraed.com
+**Commercial Truck Driver (Class A CDL)**  
+Winchester, VA 22601 • (826) 255-0831 • Jcoffman4@my.ancoraed.com
 
 ---
 
