@@ -4,6 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>James Elton Coffman, III - Class A CDL Resume</title>
+
+  <!-- PWA Manifest & App Icons -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/jpeg" href="lights-out-logo.jpg">
+  <link rel="apple-touch-icon" href="lights-out-logo.jpg">
+  <meta name="theme-color" content="#0284c7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Lights Out CDL">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
@@ -36,6 +46,78 @@
       align-items: center;
       -webkit-font-smoothing: antialiased;
     }
+
+    /* PWA Install Banner */
+    .pwa-banner {
+      width: 100%;
+      max-width: 880px;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+      border: 1px solid #374151;
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .pwa-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pwa-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .pwa-title {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 13.5px;
+      letter-spacing: 0.3px;
+    }
+
+    .pwa-desc {
+      color: #9ca3af;
+      font-size: 11.5px;
+    }
+
+    .pwa-banner-right {
+      display: flex;
+      gap: 8px;
+    }
+
+    .pwa-dismiss {
+      background: none;
+      border: 1px solid #4b5563;
+      color: #9ca3af;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .pwa-install {
+      background: var(--accent);
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+    }
+    .pwa-install:hover { background: var(--accent-dark); }
 
     .controls {
       width: 100%;
@@ -558,7 +640,7 @@
         background: none;
         padding: 0;
       }
-      .controls, .docs-bar, .modal-backdrop {
+      .controls, .docs-bar, .modal-backdrop, .pwa-banner {
         display: none !important;
       }
       .resume-sheet {
@@ -623,10 +705,39 @@
         max-height: 100%;
         border-radius: 0;
       }
+
+      .pwa-banner {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+      }
+
+      .pwa-banner-left {
+        flex-direction: column;
+      }
+
+      .pwa-banner-right {
+        justify-content: center;
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- PWA Install Banner -->
+  <div class="pwa-banner" id="pwaBanner">
+    <div class="pwa-banner-left">
+      <img src="lights-out-logo.jpg" alt="Lights Out Trucking LLC" class="pwa-logo">
+      <div>
+        <div class="pwa-title">Add Lights Out CDL to Home Screen</div>
+        <div class="pwa-desc">Instant access to driver profile & direct dispatch line</div>
+      </div>
+    </div>
+    <div class="pwa-banner-right">
+      <button class="pwa-dismiss" id="pwaDismissBtn">Not Now</button>
+      <button class="pwa-install" id="pwaInstallBtn">Install App</button>
+    </div>
+  </div>
 
   <div class="controls">
     <button class="btn btn-pdf" onclick="window.print()">
@@ -846,6 +957,45 @@
   </div>
 
   <script>
+    // Register Service Worker for PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+
+    // PWA Install Prompt Listener
+    let deferredInstallPrompt = null;
+    const pwaBanner = document.getElementById('pwaBanner');
+    const pwaInstallBtn = document.getElementById('pwaInstallBtn');
+    const pwaDismissBtn = document.getElementById('pwaDismissBtn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+      if (!sessionStorage.getItem('pwa_prompt_dismissed')) {
+        pwaBanner.style.display = 'flex';
+      }
+    });
+
+    if (pwaInstallBtn) {
+      pwaInstallBtn.addEventListener('click', async () => {
+        if (!deferredInstallPrompt) return;
+        pwaBanner.style.display = 'none';
+        deferredInstallPrompt.prompt();
+        await deferredInstallPrompt.userChoice;
+        deferredInstallPrompt = null;
+      });
+    }
+
+    if (pwaDismissBtn) {
+      pwaDismissBtn.addEventListener('click', () => {
+        pwaBanner.style.display = 'none';
+        sessionStorage.setItem('pwa_prompt_dismissed', 'true');
+      });
+    }
+
+    // Live Chat & Dispatch Relay
     const RELAY_WORKER_URL = "https://cdl-chat-relay.savdbygrace360.workers.dev";
     const SESSION_ID = "sess_" + Math.random().toString(36).substring(2, 9);
 
@@ -935,7 +1085,7 @@
 
     function startPollingReplies() {
       if (pollInterval) return;
-      pollInterval = setInterval(pollDriverReplies, 2500);
+      pollInterval = setInterval(pollDriverReplies, 1200);
     }
 
     function stopPollingReplies() {
