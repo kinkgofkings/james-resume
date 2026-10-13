@@ -79,6 +79,7 @@
       flex-direction: column;
     }
 
+    /* Header Banner */
     .header-banner {
       background: linear-gradient(135deg, #0b1324 0%, #1e293b 100%);
       color: #ffffff;
@@ -128,7 +129,7 @@
 
     .header-info {
       width: 100%;
-      max-width: 600px;
+      max-width: 650px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -175,8 +176,17 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.2s ease;
     }
 
+    a.contact-item:hover {
+      color: #38bdf8;
+      text-decoration: underline;
+    }
+
+    /* Verification Quick Bar */
     .docs-bar {
       background: #f1f5f9;
       border-bottom: 1px solid var(--border);
@@ -227,6 +237,7 @@
       transform: translateY(-1px);
     }
 
+    /* Main Grid Structure */
     .resume-body {
       padding: 32px 32px;
       display: grid;
@@ -275,6 +286,17 @@
       color: var(--text-muted);
       line-height: 1.35;
       display: block;
+    }
+
+    .card-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .card-link:hover {
+      color: var(--accent);
+      text-decoration: underline;
     }
 
     .spec-list {
@@ -374,6 +396,7 @@
       gap: 12px;
     }
 
+    /* Print & Export Rules */
     @media print {
       body {
         background: none;
@@ -394,6 +417,7 @@
       }
     }
 
+    /* Mobile Responsive Layout */
     @media (max-width: 768px) {
       .resume-body {
         grid-template-columns: 1fr;
@@ -418,7 +442,7 @@
 
       .header-contacts {
         flex-direction: column;
-        gap: 6px;
+        gap: 8px;
       }
 
       .docs-bar {
@@ -451,6 +475,7 @@
 
   <div class="resume-sheet">
 
+    <!-- Header Section -->
     <header class="header-banner">
       <div class="avatar-wrapper">
         <div class="avatar-container">
@@ -463,12 +488,14 @@
         <div class="subhead">Class A Commercial Driver (CDL-A)</div>
         <div class="header-contacts">
           <span class="contact-item">📍 Winchester, VA 22601</span>
-          <span class="contact-item">📞 (826) 255-0831</span>
-          <span class="contact-item">✉️ Jcoffman4@my.ancoraed.com</span>
+          <a class="contact-item" href="tel:8262550831">📞 (826) 255-0831</a>
+          <a class="contact-item" href="sms:8262550831">💬 Message</a>
+          <a class="contact-item" href="mailto:Jcoffman4@my.ancoraed.com">✉️ Jcoffman4@my.ancoraed.com</a>
         </div>
       </div>
     </header>
 
+    <!-- Verified Reports Quick Bar -->
     <section class="docs-bar">
       <div class="docs-bar-title">
         <span>📄 Verified Screening & Driver Record:</span>
@@ -618,11 +645,11 @@
           <div class="ref-grid">
             <div class="card-block">
               <strong>Leroy Ware</strong>
-              <span>Colleague / Reference • (408) 890-8335</span>
+              <span>Colleague / Reference • <a class="card-link" href="tel:4088908335">(408) 890-8335</a> | <a class="card-link" href="sms:4088908335">SMS</a></span>
             </div>
             <div class="card-block">
               <strong>Aaron Branham</strong>
-              <span>Professional Reference • (540) 333-5032</span>
+              <span>Professional Reference • <a class="card-link" href="tel:5403335032">(540) 333-5032</a> | <a class="card-link" href="sms:5403335032">SMS</a></span>
             </div>
           </div>
         </section>
