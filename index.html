@@ -79,7 +79,6 @@
       flex-direction: column;
     }
 
-    /* Header Banner */
     .header-banner {
       background: linear-gradient(135deg, #0b1324 0%, #1e293b 100%);
       color: #ffffff;
@@ -178,15 +177,19 @@
       gap: 6px;
       color: #cbd5e1;
       text-decoration: none;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 13px;
       transition: color 0.2s ease;
     }
 
-    a.contact-item:hover {
+    a.contact-item:hover, button.contact-item:hover {
       color: #38bdf8;
       text-decoration: underline;
     }
 
-    /* Verification Quick Bar */
     .docs-bar {
       background: #f1f5f9;
       border-bottom: 1px solid var(--border);
@@ -237,7 +240,6 @@
       transform: translateY(-1px);
     }
 
-    /* Main Grid Structure */
     .resume-body {
       padding: 32px 32px;
       display: grid;
@@ -396,13 +398,111 @@
       gap: 12px;
     }
 
-    /* Print & Export Rules */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 999;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 440px;
+      border-radius: 10px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+
+    .modal-header h3 {
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-size: 18px;
+      color: var(--primary);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .form-group label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group input, .form-group textarea {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .modal-submit {
+      background: var(--accent);
+      color: #ffffff;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .modal-submit:hover {
+      background: var(--accent-dark);
+    }
+
+    .modal-status {
+      font-size: 12px;
+      text-align: center;
+      min-height: 16px;
+    }
+
     @media print {
       body {
         background: none;
         padding: 0;
       }
-      .controls, .docs-bar {
+      .controls, .docs-bar, .modal-backdrop {
         display: none !important;
       }
       .resume-sheet {
@@ -417,7 +517,6 @@
       }
     }
 
-    /* Mobile Responsive Layout */
     @media (max-width: 768px) {
       .resume-body {
         grid-template-columns: 1fr;
@@ -475,7 +574,6 @@
 
   <div class="resume-sheet">
 
-    <!-- Header Section -->
     <header class="header-banner">
       <div class="avatar-wrapper">
         <div class="avatar-container">
@@ -489,13 +587,12 @@
         <div class="header-contacts">
           <span class="contact-item">📍 Winchester, VA 22601</span>
           <a class="contact-item" href="tel:8262550831">📞 (826) 255-0831</a>
-          <a class="contact-item" href="sms:8262550831">💬 Message</a>
+          <button class="contact-item" onclick="openDirectMessageModal()">💬 Direct Message / Live Chat</button>
           <a class="contact-item" href="mailto:Jcoffman4@my.ancoraed.com">✉️ Jcoffman4@my.ancoraed.com</a>
         </div>
       </div>
     </header>
 
-    <!-- Verified Reports Quick Bar -->
     <section class="docs-bar">
       <div class="docs-bar-title">
         <span>📄 Verified Screening & Driver Record:</span>
@@ -645,11 +742,11 @@
           <div class="ref-grid">
             <div class="card-block">
               <strong>Leroy Ware</strong>
-              <span>Colleague / Reference • <a class="card-link" href="tel:4088908335">(408) 890-8335</a> | <a class="card-link" href="sms:4088908335">SMS</a></span>
+              <span>Colleague / Reference • <a class="card-link" href="tel:4088908335">(408) 890-8335</a></span>
             </div>
             <div class="card-block">
               <strong>Aaron Branham</strong>
-              <span>Professional Reference • <a class="card-link" href="tel:5403335032">(540) 333-5032</a> | <a class="card-link" href="sms:5403335032">SMS</a></span>
+              <span>Professional Reference • <a class="card-link" href="tel:5403335032">(540) 333-5032</a></span>
             </div>
           </div>
         </section>
@@ -657,5 +754,121 @@
     </div>
   </div>
 
+  <div class="modal-backdrop" id="msgModal" onclick="closeModalOnBackdrop(event)">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Dispatch / Recruiter Live Chat</h3>
+        <button class="modal-close" onclick="closeDirectMessageModal()">&times;</button>
+      </div>
+      <p style="font-size: 12.5px; color: var(--text-muted);">
+        Send a direct message directly to my phone. I will receive an instant push notification on dispatch.
+      </p>
+      <form id="dmForm" onsubmit="handleDirectMessageSubmit(event)">
+        <div class="form-group" style="margin-bottom: 10px;">
+          <label for="senderName">Recruiter / Carrier Name</label>
+          <input type="text" id="senderName" placeholder="e.g. Dedicated Carrier Dispatch" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 10px;">
+          <label for="senderContact">Phone Number or Email</label>
+          <input type="text" id="senderContact" placeholder="e.g. (555) 000-1234 or recruiter@carrier.com" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label for="senderMessage">Message / Load Details</label>
+          <textarea id="senderMessage" rows="3" placeholder="Lane, start date, compensation, or question..." required></textarea>
+        </div>
+        <button type="submit" class="modal-submit" id="submitBtn">Send Direct Message</button>
+        <div class="modal-status" id="modalStatus"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const TELEGRAM_CONFIG = {
+      botToken: "8375312427:AAFKhpigko-FhIb7ff9NucC4EYUQJYhOtLA",
+      chatId: "7681819699"
+    };
+
+    function openDirectMessageModal() {
+      document.getElementById('msgModal').style.display = 'flex';
+      document.getElementById('senderName').focus();
+    }
+
+    function closeDirectMessageModal() {
+      document.getElementById('msgModal').style.display = 'none';
+      document.getElementById('modalStatus').innerText = '';
+    }
+
+    function closeModalOnBackdrop(e) {
+      if (e.target.id === 'msgModal') closeDirectMessageModal();
+    }
+
+    async function handleDirectMessageSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('senderName').value.trim();
+      const contact = document.getElementById('senderContact').value.trim();
+      const message = document.getElementById('senderMessage').value.trim();
+      const statusEl = document.getElementById('modalStatus');
+      const submitBtn = document.getElementById('submitBtn');
+
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Transmitting...";
+      statusEl.innerText = "";
+
+      const textPayload = `🚨 *NEW CDL-A RECRUITER CONTACT*\n\n*From:* ${name}\n*Contact:* ${contact}\n*Message:* ${message}\n\n*Time:* ${new Date().toLocaleString()}`;
+
+      try {
+        const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CONFIG.chatId,
+            text: textPayload,
+            parse_mode: 'Markdown'
+          })
+        });
+
+        if (res.ok) {
+          statusEl.style.color = "#16a34a";
+          statusEl.innerText = "Message sent directly to James's phone. Thanks!";
+          document.getElementById('dmForm').reset();
+          setTimeout(closeDirectMessageModal, 2500);
+        } else {
+          throw new Error('Transmission failed');
+        }
+      } catch (err) {
+        statusEl.style.color = "#dc2626";
+        statusEl.innerText = "Error sending message. Please use direct call/SMS.";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Send Direct Message";
+      }
+    }
+
+    window.addEventListener('load', async () => {
+      try {
+        let geoInfo = "Direct / Private";
+        try {
+          const geoRes = await fetch('https://ipapi.co/json/');
+          if (geoRes.ok) {
+            const g = await geoRes.json();
+            geoInfo = `${g.city || 'Unknown'}, ${g.region_code || ''} (${g.org || 'ISP'})`;
+          }
+        } catch (_) {}
+
+        const referrer = document.referrer ? document.referrer : "Direct / Bookmark / Link";
+        const viewAlert = `👀 *RESUME VIEW DETECTED*\n\n*Referrer:* ${referrer}\n*Location:* ${geoInfo}\n*Screen:* ${window.innerWidth}x${window.innerHeight}\n*Device:* ${navigator.userAgent.includes('Mobi') ? 'Mobile' : 'Desktop'}\n*Timestamp:* ${new Date().toLocaleString()}`;
+
+        fetch(`https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CONFIG.chatId,
+            text: viewAlert,
+            parse_mode: 'Markdown'
+          })
+        });
+      } catch (_) {}
+    });
+  </script>
 </body>
 </html>
