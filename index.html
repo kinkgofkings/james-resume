@@ -9,7 +9,7 @@
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/jpeg" href="lights-out-logo.jpg">
   <link rel="apple-touch-icon" href="lights-out-logo.jpg">
-  <meta name="theme-color" content="#0284c7">
+  <meta name="theme-color" content="#0b0f19">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Lights Out CDL">
@@ -40,84 +40,13 @@
       font-family: 'Inter', sans-serif;
       background-color: #0b0f19;
       color: var(--text-main);
-      padding: 24px 12px;
+      padding: 24px 12px 100px;
       display: flex;
       flex-direction: column;
       align-items: center;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
-
-    /* PWA Install Banner */
-    .pwa-banner {
-      width: 100%;
-      max-width: 880px;
-      margin-bottom: 14px;
-      background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
-      border: 1px solid #374151;
-      border-left: 4px solid var(--accent);
-      border-radius: 8px;
-      padding: 12px 16px;
-      display: none;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    }
-
-    .pwa-banner-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .pwa-logo {
-      width: 44px;
-      height: 44px;
-      border-radius: 8px;
-      object-fit: cover;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .pwa-title {
-      color: #ffffff;
-      font-weight: 700;
-      font-size: 13.5px;
-      letter-spacing: 0.3px;
-    }
-
-    .pwa-desc {
-      color: #9ca3af;
-      font-size: 11.5px;
-    }
-
-    .pwa-banner-right {
-      display: flex;
-      gap: 8px;
-    }
-
-    .pwa-dismiss {
-      background: none;
-      border: 1px solid #4b5563;
-      color: #9ca3af;
-      border-radius: 6px;
-      padding: 6px 12px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .pwa-install {
-      background: var(--accent);
-      color: #ffffff;
-      border: none;
-      border-radius: 6px;
-      padding: 6px 16px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
-    }
-    .pwa-install:hover { background: var(--accent-dark); }
 
     .controls {
       width: 100%;
@@ -480,6 +409,131 @@
       gap: 12px;
     }
 
+    /* Spring-Bounced Bottom-Sheet PWA Modal */
+    .pwa-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 15, 25, 0.82);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 18px;
+      z-index: 99999;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .pwa-modal-backdrop.pwa-visible {
+      opacity: 1;
+    }
+
+    .pwa-modal-card {
+      background: linear-gradient(145deg, #131b2e 0%, #0b1120 100%);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      box-shadow: 0 -12px 45px rgba(0, 0, 0, 0.8), 0 0 30px rgba(2, 132, 199, 0.25);
+      width: 100%;
+      max-width: 440px;
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transform: translateY(120%);
+      transition: transform 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .pwa-modal-backdrop.pwa-visible .pwa-modal-card {
+      transform: translateY(0);
+    }
+
+    .pwa-brand-ring {
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, #38bdf8, #0284c7);
+      box-shadow: 0 0 20px rgba(2, 132, 199, 0.5);
+      margin-bottom: 14px;
+      animation: pwaPulse 2.8s infinite ease-in-out;
+    }
+
+    @keyframes pwaPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); box-shadow: 0 0 28px rgba(56, 189, 248, 0.85); }
+    }
+
+    .pwa-brand-icon {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #000;
+      display: block;
+    }
+
+    .pwa-title {
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #ffffff;
+      font-size: 21px;
+      margin-bottom: 4px;
+    }
+
+    .pwa-subhead {
+      color: #38bdf8;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .pwa-body-text {
+      color: #cbd5e1;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .pwa-btn-stack {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .pwa-btn-install {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff;
+      border: none;
+      padding: 13px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+    .pwa-btn-install:active { transform: scale(0.98); }
+    .pwa-btn-install:hover { filter: brightness(1.1); }
+
+    .pwa-btn-dismiss {
+      background: transparent;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .pwa-btn-dismiss:hover { color: #f1f5f9; border-color: #64748b; }
+
     /* Live Chat Modal Styles */
     .modal-backdrop {
       position: fixed;
@@ -640,7 +694,7 @@
         background: none;
         padding: 0;
       }
-      .controls, .docs-bar, .modal-backdrop, .pwa-banner {
+      .controls, .docs-bar, .modal-backdrop, .pwa-modal-backdrop {
         display: none !important;
       }
       .resume-sheet {
@@ -705,37 +759,26 @@
         max-height: 100%;
         border-radius: 0;
       }
-
-      .pwa-banner {
-        flex-direction: column;
-        align-items: stretch;
-        text-align: center;
-      }
-
-      .pwa-banner-left {
-        flex-direction: column;
-      }
-
-      .pwa-banner-right {
-        justify-content: center;
-      }
     }
   </style>
 </head>
 <body>
 
-  <!-- PWA Install Banner -->
-  <div class="pwa-banner" id="pwaBanner">
-    <div class="pwa-banner-left">
-      <img src="lights-out-logo.jpg" alt="Lights Out Trucking LLC" class="pwa-logo">
-      <div>
-        <div class="pwa-title">Add Lights Out CDL to Home Screen</div>
-        <div class="pwa-desc">Instant access to driver profile & direct dispatch line</div>
+  <!-- Spring Animated PWA Install Modal -->
+  <div class="pwa-modal-backdrop" id="pwaBackdrop">
+    <div class="pwa-modal-card">
+      <div class="pwa-brand-ring">
+        <img src="lights-out-logo.jpg" alt="Lights Out Trucking LLC" class="pwa-brand-icon">
       </div>
-    </div>
-    <div class="pwa-banner-right">
-      <button class="pwa-dismiss" id="pwaDismissBtn">Not Now</button>
-      <button class="pwa-install" id="pwaInstallBtn">Install App</button>
+      <div class="pwa-title">Lights Out Trucking</div>
+      <div class="pwa-subhead">Class A Driver Dispatch App</div>
+      <div class="pwa-body-text" id="pwaInstructions">
+        Install the official driver dispatch app to your home screen for instant phone access, live 2-way chat alerts, and offline MVR access.
+      </div>
+      <div class="pwa-btn-stack">
+        <button class="pwa-btn-install" id="pwaActionBtn">⚡ Add to Home Screen</button>
+        <button class="pwa-btn-dismiss" id="pwaCloseBtn">Continue in Browser</button>
+      </div>
     </div>
   </div>
 
@@ -957,45 +1000,88 @@
   </div>
 
   <script>
-    // Register Service Worker for PWA
+    // 1. Service Worker Registration
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js').catch(() => {});
       });
     }
 
-    // PWA Install Prompt Listener
-    let deferredInstallPrompt = null;
-    const pwaBanner = document.getElementById('pwaBanner');
-    const pwaInstallBtn = document.getElementById('pwaInstallBtn');
-    const pwaDismissBtn = document.getElementById('pwaDismissBtn');
+    // 2. Guaranteed Animated PWA Modal Controller
+    (function initPwaModal() {
+      const isAlreadyInstalled = 
+        window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone === true ||
+        localStorage.getItem('lights_out_pwa_installed') === 'true';
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredInstallPrompt = e;
-      if (!sessionStorage.getItem('pwa_prompt_dismissed')) {
-        pwaBanner.style.display = 'flex';
+      if (isAlreadyInstalled) return;
+
+      const pwaBackdrop = document.getElementById('pwaBackdrop');
+      const pwaActionBtn = document.getElementById('pwaActionBtn');
+      const pwaCloseBtn = document.getElementById('pwaCloseBtn');
+      const pwaInstructions = document.getElementById('pwaInstructions');
+      let deferredPrompt = null;
+
+      const isIos = /iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+      function openModal() {
+        if (localStorage.getItem('lights_out_pwa_installed') === 'true') return;
+
+        if (isIos) {
+          pwaInstructions.innerHTML = "Tap the <strong>Share</strong> button (box with up arrow) in Safari, then select <strong>'Add to Home Screen'</strong>.";
+          pwaActionBtn.innerText = "Understood";
+        }
+
+        pwaBackdrop.style.display = 'flex';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            pwaBackdrop.classList.add('pwa-visible');
+          });
+        });
       }
-    });
 
-    if (pwaInstallBtn) {
-      pwaInstallBtn.addEventListener('click', async () => {
-        if (!deferredInstallPrompt) return;
-        pwaBanner.style.display = 'none';
-        deferredInstallPrompt.prompt();
-        await deferredInstallPrompt.userChoice;
-        deferredInstallPrompt = null;
+      function dismissModal(permanent = false) {
+        pwaBackdrop.classList.remove('pwa-visible');
+        setTimeout(() => {
+          pwaBackdrop.style.display = 'none';
+        }, 400);
+
+        if (permanent) {
+          localStorage.setItem('lights_out_pwa_installed', 'true');
+        }
+      }
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        openModal();
       });
-    }
 
-    if (pwaDismissBtn) {
-      pwaDismissBtn.addEventListener('click', () => {
-        pwaBanner.style.display = 'none';
-        sessionStorage.setItem('pwa_prompt_dismissed', 'true');
+      window.addEventListener('appinstalled', () => {
+        dismissModal(true);
       });
-    }
 
-    // Live Chat & Dispatch Relay
+      pwaActionBtn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          if (outcome === 'accepted') {
+            dismissModal(true);
+          } else {
+            dismissModal(false);
+          }
+          deferredPrompt = null;
+        } else {
+          dismissModal(false);
+        }
+      });
+
+      pwaCloseBtn.addEventListener('click', () => dismissModal(false));
+
+      setTimeout(openModal, 1200);
+    })();
+
+    // 3. Live Chat & Dispatch Relay
     const RELAY_WORKER_URL = "https://cdl-chat-relay.savdbygrace360.workers.dev";
     const SESSION_ID = "sess_" + Math.random().toString(36).substring(2, 9);
 
