@@ -1082,7 +1082,7 @@
     })();
 
     // 3. Live Chat & Dispatch Relay
-    const RELAY_WORKER_URL = "https://cdl-chat-relay.savdbygrace360.workers.dev";
+    const RELAY_WORKER_URL = "https://james-chat-relay.savdbygrace360.workers.dev";
     const SESSION_ID = "sess_" + Math.random().toString(36).substring(2, 9);
 
     let pollInterval = null;
@@ -1194,26 +1194,38 @@
       } catch (_) {}
     }
 
-    window.addEventListener('load', () => {
-      try {
-        const referrer = document.referrer ? document.referrer : "Referrer Direct / Bookmark / Link";
-        const deviceType = /Mobi|Android|iPhone/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop';
-        const viewText = `${referrer} | Device ${deviceType}`;
+    // 4. Guaranteed Self-Executing Visitor Alert
+    (function fireVisitorPing() {
+      if (sessionStorage.getItem('visitor_ping_dispatched')) return;
+      sessionStorage.setItem('visitor_ping_dispatched', 'true');
 
+      const referrer = document.referrer ? document.referrer : "Direct / Bookmark / Link";
+      const deviceType = /Mobi|Android|iPhone/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop';
+      const viewText = `Referrer: ${referrer} | Device: ${deviceType}`;
+
+      const payload = JSON.stringify({
+        sessionId: SESSION_ID,
+        name: "Visitor Monitor",
+        contact: "Automated Ping",
+        text: viewText,
+        isVisitor: true
+      });
+
+      let sent = false;
+      if (navigator.sendBeacon) {
+        const blob = new Blob([payload], { type: 'application/json' });
+        sent = navigator.sendBeacon(`${RELAY_WORKER_URL}/send`, blob);
+      }
+
+      if (!sent) {
         fetch(`${RELAY_WORKER_URL}/send`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            sessionId: SESSION_ID,
-            name: "Visitor Monitor",
-            contact: "Automated Ping",
-            text: viewText,
-            isVisitor: true
-          }),
+          body: payload,
           keepalive: true
         }).catch(() => {});
-      } catch (_) {}
-    });
+      }
+    })();
   </script>
 </body>
 </html>
