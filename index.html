@@ -1007,7 +1007,7 @@
       });
     }
 
-    // 2. Guaranteed Animated PWA Modal Controller
+    // 2. Animated PWA Modal Controller
     (function initPwaModal() {
       const isAlreadyInstalled = 
         window.matchMedia('(display-mode: standalone)').matches ||
@@ -1194,37 +1194,45 @@
       } catch (_) {}
     }
 
-    // 4. Guaranteed Self-Executing Visitor Alert
+    // 4. Guaranteed Active Visitor Alert & Engagement Pipeline
     (function fireVisitorPing() {
-      if (sessionStorage.getItem('visitor_ping_dispatched')) return;
-      sessionStorage.setItem('visitor_ping_dispatched', 'true');
-
-      const referrer = document.referrer ? document.referrer : "Direct / Bookmark / Link";
+      const referrer = document.referrer ? document.referrer : "Direct / Link";
       const deviceType = /Mobi|Android|iPhone/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop';
-      const viewText = `Referrer: ${referrer} | Device: ${deviceType}`;
+      const visitTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const viewText = `${deviceType} | Ref: ${referrer}`;
 
       const payload = JSON.stringify({
         sessionId: SESSION_ID,
         name: "Visitor Monitor",
         contact: "Automated Ping",
         text: viewText,
+        clientTime: visitTime,
         isVisitor: true
       });
 
-      let sent = false;
-      if (navigator.sendBeacon) {
-        const blob = new Blob([payload], { type: 'application/json' });
-        sent = navigator.sendBeacon(`${RELAY_WORKER_URL}/send`, blob);
-      }
+      // Send visitor ping immediately
+      fetch(`${RELAY_WORKER_URL}/send`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload
+      }).catch(() => {});
 
-      if (!sent) {
-        fetch(`${RELAY_WORKER_URL}/send`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: payload,
-          keepalive: true
-        }).catch(() => {});
-      }
+      // Automatically listen for incoming driver greetings in the background
+      setInterval(async () => {
+        try {
+          const res = await fetch(`${RELAY_WORKER_URL}/poll?sessionId=${SESSION_ID}`);
+          if (!res.ok) return;
+          const data = await res.json();
+          if (data.messages && data.messages.length > 0) {
+            // When James swipe-replies from Telegram, pop the modal open on visitor screen
+            document.getElementById('msgModal').style.display = 'flex';
+            data.messages.forEach(msg => {
+              appendMessage(msg.sender, msg.text, "msg-in");
+            });
+            startPollingReplies();
+          }
+        } catch (_) {}
+      }, 1500);
     })();
   </script>
 </body>
