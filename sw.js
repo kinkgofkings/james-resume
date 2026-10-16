@@ -1,4 +1,4 @@
-const CACHE_NAME = 'james-cdl-v4';
+const CACHE_NAME = 'lightsout-cdl-v6';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -35,8 +35,7 @@ self.addEventListener('fetch', (event) => {
     event.request.url.includes('/send') || 
     event.request.url.includes('/poll') || 
     event.request.url.includes('telegram') ||
-    event.request.url.includes('workers.dev') ||
-    event.request.url.includes('ipapi.co')
+    event.request.url.includes('workers.dev')
   ) {
     return;
   }
