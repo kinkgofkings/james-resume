@@ -1194,19 +1194,11 @@
       } catch (_) {}
     }
 
-    window.addEventListener('load', async () => {
+    window.addEventListener('load', () => {
       try {
-        let geoInfo = "Direct / Private";
-        try {
-          const geoRes = await fetch('https://ipapi.co/json/');
-          if (geoRes.ok) {
-            const g = await geoRes.json();
-            geoInfo = `${g.city || 'Unknown'}, ${g.region_code || ''} (${g.org || 'ISP'})`;
-          }
-        } catch (_) {}
-
         const referrer = document.referrer ? document.referrer : "Direct / Bookmark / Link";
-        const viewText = `Resume View: Referrer ${referrer} | Location ${geoInfo} | Device ${navigator.userAgent.includes('Mobi') ? 'Mobile' : 'Desktop'}`;
+        const deviceType = navigator.userAgent.includes('Mobi') ? 'Mobile' : 'Desktop';
+        const viewText = `Resume View: Referrer ${referrer} | Device ${deviceType}`;
 
         fetch(`${RELAY_WORKER_URL}/send`, {
           method: 'POST',
@@ -1217,7 +1209,7 @@
             contact: "Automated Ping",
             text: viewText
           })
-        });
+        }).catch(() => {});
       } catch (_) {}
     });
   </script>
