@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lightsout-cdl-v6';
+const CACHE_NAME = 'lightsout-cdl-v7';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -31,6 +31,7 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  // Let live chat, worker alerts, and Telegram endpoints pass through without cache interference
   if (
     event.request.url.includes('/send') || 
     event.request.url.includes('/poll') || 
