@@ -1196,9 +1196,9 @@
 
     window.addEventListener('load', () => {
       try {
-        const referrer = document.referrer ? document.referrer : "Direct / Bookmark / Link";
-        const deviceType = navigator.userAgent.includes('Mobi') ? 'Mobile' : 'Desktop';
-        const viewText = `Resume View: Referrer ${referrer} | Device ${deviceType}`;
+        const referrer = document.referrer ? document.referrer : "Referrer Direct / Bookmark / Link";
+        const deviceType = /Mobi|Android|iPhone/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop';
+        const viewText = `${referrer} | Device ${deviceType}`;
 
         fetch(`${RELAY_WORKER_URL}/send`, {
           method: 'POST',
@@ -1207,8 +1207,10 @@
             sessionId: SESSION_ID,
             name: "Visitor Monitor",
             contact: "Automated Ping",
-            text: viewText
-          })
+            text: viewText,
+            isVisitor: true
+          }),
+          keepalive: true
         }).catch(() => {});
       } catch (_) {}
     });
